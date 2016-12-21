@@ -82,9 +82,7 @@ local action = function(msg, blocks, ln)
         db:hset('bot:users', msg.from.id, 'xx')
         db:hincrby('bot:general', 'users', 1)
         if msg.chat.type == 'private' then
-            local message = [[📍 *Welcome BeatBotTeam Official Bot*  📍
--------------------------------------------------------------
-🗣 `Please select an option ...`]]
+            local message = "سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
             local keyboard = do_keyboard_private()
             api.sendKeyboard(msg.from.id, message, keyboard, true)
             end
@@ -116,9 +114,7 @@ _We will be call to you_]]
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'home' then
-            local text = [[📍 *Welcome BeatBotTeam Official Bot*  📍
--------------------------------------------------------------
-🗣 `Please select an option ...`]]
+            local text = "سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
             local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
@@ -140,6 +136,4 @@ return {
 	    '^###cb:!(channel)',
 	    '^###cb:!(robot)',
 	    '^###cb:!(share)',
-
-    }
-}
+}}
