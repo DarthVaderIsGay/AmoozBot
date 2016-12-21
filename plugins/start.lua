@@ -1,12 +1,6 @@
 local function do_keyboard_robot()
-    local keyboard = {}
-    keyboard.inline_keyboard = {
-		{
-    					{text = 'Share Robot Contact 🤖🤘🏾', callback_data = '!share'},
-    					},
-    					{
-    		    		{text = 'Buy Group 💸', callback_data = '!buygroup'},
-    		    		{text = 'Support 👥', url = 'https://telegram.me/joinchat/BvytAD9KL7J2PE2u0ek3ZA'},
+local keyboard = {}
+keyboard.inline_keyboard = {{{text = '🎓دوره اول متوسطه', callback_data = '!school1'}},{{text = '🎓دوره دوم متوسطه', callback_data = '!school2'},
 	    },
 	    {
 	    {text = '🔙', callback_data = '!home'}
@@ -104,8 +98,7 @@ local action = function(msg, blocks, ln)
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'robot' then
-            local text = [[🔸*BeatBotTG*🔹
-🚩 _An advanced robot for entertainment group manager and anti-spam_]]
+            local text = "سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
             local keyboard = do_keyboard_robot()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
