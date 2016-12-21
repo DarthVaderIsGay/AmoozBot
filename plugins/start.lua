@@ -180,4 +180,5 @@ return {
 	    '^###cb:!(channel)',
 	    '^###cb:!(robot)',
 	    '^###cb:!(share)',
+            '^###cb:!(school1)',
 }}
