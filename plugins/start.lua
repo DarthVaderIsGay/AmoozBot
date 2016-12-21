@@ -54,6 +54,17 @@ local function do_keyboard_school1()
     return keyboard
 end
 
+local function do_keyboard_school2()
+    local keyboard = {}
+    keyboard.inline_keyboard = {
+    	{{text = '📚دهم', callback_data = '!school10'},},
+	{{text = '📚یازدهم', url = '!school11'},},
+        {{text = '📚دوازدهم', url = '!school12'},},
+        {{text = '🔙', callback_data = '!home'},}
+    }
+    return keyboard
+end
+
 local action = function(msg, blocks, ln)
     if blocks[1] == 'start' or blocks[1] == 'help' then
         db:hset('bot:users', msg.from.id, 'xx')
@@ -91,7 +102,7 @@ _We will be call to you_]]
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
 if query == 'home' then
-            local text = "سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
+            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
             local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
