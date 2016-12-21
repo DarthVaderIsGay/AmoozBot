@@ -30,20 +30,7 @@ end
 local function do_keyboard_private()
     local keyboard = {}
     keyboard.inline_keyboard = {
-    	{
-    		{text = '🌐 Site', url = 'http://beatbot.ir'},
-    		{text = '📡 Channels', callback_data = '!channel'},
-	    },
-		{
-	        {text = '📥 Contact Us 📤', callback_data = '/chat'},
-        },
-		{
-	        {text = 'About Us 👥', callback_data = '!aboutus'},
-        },
-	    {
-	        {text = '🔸BeatBotTG🔹', callback_data = '!robot'},
-        }
-    }
+    	{{text = '🎓دوره متوسطه اول', callback_data = '!school1'},},{{text = '🎓دوره متوسطه دوم', callback_data = '!school2'},}}
     return keyboard
 end
 
@@ -51,28 +38,18 @@ local function do_keyboard_startme()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = '🙃👉 Click here ! 👈🙃', url = 'https://telegram.me/'..bot.username}
+    		{text = '🙃👉 اینجا کلیک کنید! 👈🙃', url = 'https://telegram.me/'..bot.username}
 	    }
     }
     return keyboard
 end
-local function do_keyboard_channel()
+local function do_keyboard_school1()
     local keyboard = {}
     keyboard.inline_keyboard = {
-    	{
-    		{text = 'Persian Channel 🇮🇷', url = 'https://telegram.me/BeatBot_team'},
-	    },
-	{
-	        		{text = 'English Channel 🇬🇧', url = 'https://telegram.me/BeatBotTeam'},
-
-    },
-		{
-					{text = 'News Channel 🗣', url = 'https://telegram.me/BeatBot_News'},
-		},
-		{
-	    {text = '🔙', callback_data = '!home'},
-        }
-    
+    	{{text = '📚هفتم', callback_data = '!school7'},},
+	{{text = '📚هشتم', url = '!school8'},},
+        {{text = '📚نهم', url = '!school9'},},
+        {{text = '🔙', callback_data = '!home'},}
     }
     return keyboard
 end
@@ -82,12 +59,12 @@ local action = function(msg, blocks, ln)
         db:hset('bot:users', msg.from.id, 'xx')
         db:hincrby('bot:general', 'users', 1)
         if msg.chat.type == 'private' then
-            local message = "سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
+            local message = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
             local keyboard = do_keyboard_private()
             api.sendKeyboard(msg.from.id, message, keyboard, true)
             end
 			if msg.chat.type == 'group' or msg.chat.type == 'supergroup' then
-          api.sendKeyboard(msg.chat.id, 'Hey 👋 Please `start` me in *PV* 🖐😄👇' ,do_keyboard_startme(), true)
+          api.sendKeyboard(msg.chat.id, '' ,do_keyboard_startme(), true)
         end
         return
     end
