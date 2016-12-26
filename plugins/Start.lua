@@ -19,15 +19,6 @@ local function do_keyboard_teach()
     return keyboard
 end
 
-local function do_keyboard_startme()
-    local keyboard = {}
-    keyboard.inline_keyboard = {
-    	{
-    		{text = '🙃👉 اینجا کلیک کنید! 👈🙃', url = 'https://telegram.me/'..bot.username}
-	    }
-    }
-    return keyboard
-end
 local function do_keyboard_school1()
     local keyboard = {}
     keyboard.inline_keyboard = {
@@ -72,7 +63,7 @@ local function do_keyboard_teach2()
     return keyboard
 end
 local action = function(msg, blocks, ln)
-    if blocks[1] == 'start' or blocks[1] == 'help' then
+    if blocks[1] == 'start' then
         db:hset('bot:users', msg.from.id, 'xx')
         db:hincrby('bot:general', 'users', 1)
         if msg.chat.type == 'private' then
@@ -80,9 +71,6 @@ local action = function(msg, blocks, ln)
             local keyboard = do_keyboard_private()
             api.sendKeyboard(msg.from.id, message, keyboard, true)
             end
-			if msg.chat.type == 'group' or msg.chat.type == 'supergroup' then
-          api.sendKeyboard(msg.chat.id, '' ,do_keyboard_startme(), true)
-        end
         return
     end
 
