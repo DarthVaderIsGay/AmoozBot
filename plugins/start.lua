@@ -1,57 +1,21 @@
-local function do_keyboard_robot()
-    local keyboard = {}
-    keyboard.inline_keyboard = {
-		{
-    					{text = 'Share Robot Contact 🤖🤘🏾', callback_data = '!share'},
-    					},
-    					{
-    		    		{text = 'Buy Group 💸', callback_data = '!buygroup'},
-    		    		{text = 'Support 👥', url = 'https://telegram.me/joinchat/BvytAD9KL7J2PE2u0ek3ZA'},
-	    },
-	    {
-	    {text = '🔙', callback_data = '!home'}
-        }
-    }
-    return keyboard
-end
-local function do_keyboard_buygroup()
-    local keyboard = {}
-    keyboard.inline_keyboard = {
-{
-    		    		{text = 'Iranians', url = 'http://salam.im/buy/ecgvlup3ld'},
-    		    		{text = 'Other countries', url = 'https://telegram.me/joinchat/BvytAD9KL7J2PE2u0ek3ZA'},
-	    },
-	    {
-	    {text = '🔙', callback_data = '!robot'}
-        }
-    }
-    return keyboard
-end
-
-local function do_keyboard_panel()
-    local keyboard = {}
-    keyboard.inline_keyboard = {
-    	{
-    		{text = '🌐 Site', url = 'http://beatbot.ir'},
-    		{text = '📡 Channels', callback_data = '!channel'},
-	    },
-		{
-	        {text = '📥 Contact Us 📤', callback_data = '/chat'},
-        },
-		{
-	        {text = 'About Us 👥', callback_data = '!aboutus'},
-        },
-	    {
-	        {text = 'راهنما', callback_data = '!robot'},
-        }
-    }
-    return keyboard
-end
-
 local function do_keyboard_private()
     local keyboard = {}
     keyboard.inline_keyboard = {
-    	{{text = '🎓دوره متوسطه اول', callback_data = '!school1'}, }, {{text = '🎓دوره متوسطه دوم', callback_data = '!school2'}, }}
+    	{{text = '📌دانش آموز', callback_data = '!school'}}, {{text = '📌آموزگار', callback_data = '!teach'}}}
+    return keyboard
+end
+
+local function do_keyboard_school()
+    local keyboard = {}
+    keyboard.inline_keyboard = {
+    	{{text = '🎓دوره متوسطه اول', callback_data = '!school1'}}, {{text = '🎓دوره متوسطه دوم', callback_data = '!school2'}}}
+    return keyboard
+end
+
+local function do_keyboard_teach()
+    local keyboard = {}
+    keyboard.inline_keyboard = {
+    	{{text = '🎓دوره متوسطه اول', callback_data = '!teach1'}}, {{text = '🎓دوره متوسطه دوم', callback_data = '!teach2'}}}
     return keyboard
 end
 
@@ -67,10 +31,10 @@ end
 local function do_keyboard_school1()
     local keyboard = {}
     keyboard.inline_keyboard = {
-    	{{text = '📚هفتم', callback_data = '!school7'}, },
-	{{text = '📚هشتم', url = '!school8'}, },
-        {{text = '📚نهم', url = '!school9'}, },
-        {{text = '🔙', callback_data = '!home'}, }
+    	{{text = '📚هفتم', callback_data = '!school7'}},
+	{{text = '📚هشتم', url = '!school8'}},
+        {{text = '📚نهم', url = '!school9'}},
+        {{text = '🔙', callback_data = '!home'}}
     }
     return keyboard
 end
@@ -78,14 +42,35 @@ end
 local function do_keyboard_school2()
     local keyboard = {}
     keyboard.inline_keyboard = {
-    	{{text = '📚دهم', callback_data = '!school10'}, },
-	{{text = '📚یازدهم', url = '!school11'}, },
-        {{text = '📚دوازدهم', url = '!school12'}, },
-        {{text = '🔙', callback_data = '!home'}, }
+    	{{text = '📚دهم', callback_data = '!school10'}},
+	{{text = '📚یازدهم', url = '!school11'}},
+        {{text = '📚دوازدهم', url = '!school12'}},
+        {{text = '🔙', callback_data = '!home'}}
     }
     return keyboard
 end
 
+local function do_keyboard_teach1()
+    local keyboard = {}
+    keyboard.inline_keyboard = {
+    	{{text = '📚هفتم', callback_data = '!teach7'}},
+	{{text = '📚هشتم', url = '!teach8'}},
+        {{text = '📚نهم', url = '!teach9'}},
+        {{text = '🔙', callback_data = '!home'}}
+    }
+    return keyboard
+end
+
+local function do_keyboard_teach2()
+    local keyboard = {}
+    keyboard.inline_keyboard = {
+    	{{text = '📚دهم', callback_data = '!teach10'}},
+	{{text = '📚یازدهم', url = '!teach11'}},
+        {{text = '📚دوازدهم', url = '!teach12'}},
+        {{text = '🔙', callback_data = '!home'}}
+    }
+    return keyboard
+end
 local action = function(msg, blocks, ln)
     if blocks[1] == 'start' or blocks[1] == 'help' then
         db:hset('bot:users', msg.from.id, 'xx')
@@ -105,66 +90,21 @@ local action = function(msg, blocks, ln)
         local query = blocks[1]
         local msg_id = msg.message_id
         local text
-        if query == 'channel' then
-            local text = '📡 *BeatBotTeam Channels :*'
-            local keyboard = do_keyboard_channel()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
-if query == 'robot' then
-            local text = [[🔸*BeatBotTG*🔹
-🚩 _An advanced robot for entertainment group manager and anti-spam_]]
-            local keyboard = do_keyboard_robot()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
-if query == 'buygroup' then
-            local text = [[_Please wait after payment_ 
-_We will be call to you_]]
-            local keyboard = do_keyboard_buygroup()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
 if query == 'home' then
-            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
+            local text = "👋سلام "..msg.from.print_name.."!\nلطفا نوع کاربری خود را انتخاب کنید:"
             local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
-if query == 'school7' then
-            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
-            local keyboard = do_keyboard_panel()
+		if query == 'school' then
+            local text = "دوره تحصیلی خود را انتخاب کنید:"
+            local keyboard = do_keyboard_school()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
-if query == 'school7' then
-            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
-            local keyboard = do_keyboard_panel()
+	       if query == 'teach' then
+            local text = "دوره تدریسی خود را انتخاب کنید:"
+            local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
-if query == 'school8' then
-            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
-            local keyboard = do_keyboard_panel()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
-if query == 'school9' then
-            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
-            local keyboard = do_keyboard_panel()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
-if query == 'school10' then
-            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
-            local keyboard = do_keyboard_panel()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
-if query == 'school11' then
-            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
-            local keyboard = do_keyboard_panel()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
-if query == 'school12' then
-            local text = "👋سلام "..msg.from.print_name.."!\nدوره تحصیلی خود را انتخاب کنید:"
-            local keyboard = do_keyboard_panel()
-        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
-end
-        if query == 'share' then
-     api.sendContact(msg.from.id, '+639380063518', '🔸ßελτ ßΘτ🔹 [ Use ! ]')
-end
+    end
     end
 
 end
@@ -172,13 +112,19 @@ end
 return {
 	action = action,
 	triggers = {
-	    '^/(start)@BeatBotTeamBot$',
 	    '^/(start)$',
-	    '^/(help)$',
+	    '^/(restart)$',
+	    '^/(reset)$',
 	    '^###cb:!(home)',
-		'^###cb:!(buygroup)',
+	    '^###cb:!(buygroup)',
 	    '^###cb:!(channel)',
 	    '^###cb:!(robot)',
 	    '^###cb:!(share)',
-            '^###cb:!(school1)',
+	    '^###cb:!(teach1)',
+	    '^###cb:!(teach2)',
+	    '^###cb:!(school1)',
+	    '^###cb:!(school2)',
+	    '^###cb:!(teach)',
+	    '^###cb:!(school)',
+		
 }}
