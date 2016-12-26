@@ -111,6 +111,18 @@ triggers = {
 	    '^###cb:!(aboutus)',
 	    '^###cb:!(owners)',
 	    '^###cb:!(members)',
-	    '^###cb:!(friends)',
-    }
+            '^###cb:!(friends)',
+	    '^###cb:!(teach7)',
+	    '^###cb:!(school7)',
+	    '^###cb:!(teach8)',
+	    '^###cb:!(school8)',
+            '^###cb:!(teach9)',
+	    '^###cb:!(school9)',
+	    '^###cb:!(teach10)',
+	    '^###cb:!(school10)',
+	    '^###cb:!(teach11)',
+	    '^###cb:!(school11)',
+	    '^###cb:!(teach12)',
+	    '^###cb:!(school12)',
+	}
 }
