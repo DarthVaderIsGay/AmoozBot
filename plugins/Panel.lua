@@ -1,14 +1,14 @@
-local function do_keyboard_aboutus()
+local function do_keyboard_teacher()
     local keyboard = {}
     keyboard.inline_keyboard = {
     	{
-    		{text = 'Team owners 🤓', callback_data = '!owners'},
+    		{text = '📝امتحانات', callback_data = '!exams'},
 			},
 			{
-			{text = 'Team members 👥', callback_data = '!members'},
+			{text = '✏️دانش آموزان✏️', callback_data = '!students'},
 			},
 			{
-			{text = 'Our friends 🌹', callback_data = '!friends'},
+			{text = '❓راهنما', callback_data = '!help'},
 			},
 			{
 	    {text = '🔙', callback_data = '!home'},
@@ -111,18 +111,8 @@ triggers = {
 	    '^###cb:!(aboutus)',
 	    '^###cb:!(owners)',
 	    '^###cb:!(members)',
-            '^###cb:!(friends)',
-	    '^###cb:!(teach7)',
-	    '^###cb:!(school7)',
-	    '^###cb:!(teach8)',
-	    '^###cb:!(school8)',
-            '^###cb:!(teach9)',
-	    '^###cb:!(school9)',
-	    '^###cb:!(teach10)',
-	    '^###cb:!(school10)',
-	    '^###cb:!(teach11)',
-	    '^###cb:!(school11)',
-	    '^###cb:!(teach12)',
-	    '^###cb:!(school12)',
+      '^###cb:!(friends)',
+	    '^###cb:!(teach)(.*)',
+	    '^###cb:!(school)(.*)',
 	}
 }

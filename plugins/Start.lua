@@ -25,7 +25,7 @@ local function do_keyboard_school1()
     	{{text = '📚هفتم', callback_data = '!school7'}},
 	{{text = '📚هشتم', url = '!school8'}},
         {{text = '📚نهم', url = '!school9'}},
-        {{text = '🔙', callback_data = '!home'}}
+        {{text = '🔙', callback_data = '!school'}}
     }
     return keyboard
 end
@@ -36,29 +36,7 @@ local function do_keyboard_school2()
     	{{text = '📚دهم', callback_data = '!school10'}},
 	{{text = '📚یازدهم', url = '!school11'}},
         {{text = '📚دوازدهم', url = '!school12'}},
-        {{text = '🔙', callback_data = '!home'}}
-    }
-    return keyboard
-end
-
-local function do_keyboard_teach1()
-    local keyboard = {}
-    keyboard.inline_keyboard = {
-    	{{text = '📚هفتم', callback_data = '!teach7'}},
-	{{text = '📚هشتم', url = '!teach8'}},
-        {{text = '📚نهم', url = '!teach9'}},
-        {{text = '🔙', callback_data = '!home'}}
-    }
-    return keyboard
-end
-
-local function do_keyboard_teach2()
-    local keyboard = {}
-    keyboard.inline_keyboard = {
-    	{{text = '📚دهم', callback_data = '!teach10'}},
-	{{text = '📚یازدهم', url = '!teach11'}},
-        {{text = '📚دوازدهم', url = '!teach12'}},
-        {{text = '🔙', callback_data = '!home'}}
+        {{text = '🔙', callback_data = '!school'}}
     }
     return keyboard
 end
@@ -73,7 +51,6 @@ local action = function(msg, blocks, ln)
             end
         return
     end
-
     if msg.cb then
         local query = blocks[1]
         local msg_id = msg.message_id
@@ -83,14 +60,29 @@ if query == 'home' then
             local keyboard = do_keyboard_private()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
+if query == 'restart' then
+            local message = "شما خارج شدید!\nدوره تحصیلی خود را انتخاب کنید:"
+            local keyboard = do_keyboard_private()
+        api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
+end
 		if query == 'school' then
             local text = "دوره تحصیلی خود را انتخاب کنید:"
             local keyboard = do_keyboard_school()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
 end
+if query == 'school1' then
+        local text = "پایه تحصیلی خود را انتخاب کنید:"
+        local keyboard = do_keyboard_school1()
+    api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
+end
+if query == 'school2' then
+        local text = "پایه تحصیلی خود را انتخاب کنید:"
+        local keyboard = do_keyboard_school2()
+    api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
+end
 	       if query == 'teach' then
             local text = "دوره تدریسی خود را انتخاب کنید:"
-            local keyboard = do_keyboard_private()
+            local keyboard = do_keyboard_teach()
         api.editMessageText(msg.chat.id, msg_id, text, keyboard, true)
     end
     end
@@ -101,13 +93,11 @@ return {
 	action = action,
 	triggers = {
 	    '^/(start)$',
-	    '^/(restart)$',
+	    '^##cb:!(restart)',
 	    '^###cb:!(home)',
-	    '^###cb:!(teach1)',
-	    '^###cb:!(teach2)',
 	    '^###cb:!(school1)',
 	    '^###cb:!(school2)',
 	    '^###cb:!(teach)',
 	    '^###cb:!(school)',
-		
+
 }}
